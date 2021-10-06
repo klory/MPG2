@@ -1,0 +1,10 @@
+datasets:
+  pizza10:
+    view_regressor: view_regressor/runs/pizza3d/1ab8hru7/00004999.ckpt
+    classifier: ingr_classifier/runs/pizza10/1t5xrvwx/batch5000.ckpt
+    inception: inception_pizza10.pkl
+
+models: 
+  mpg:
+    ckpt_dir: mpg/runs/30cupu9m
+    ckpt_path: mpg/runs/30cupu9m/00200000.ckpt

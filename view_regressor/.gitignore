@@ -1,0 +1,13 @@
+runs/
+wandb/
+__pycache__/
+*.pkl
+.ipynb_checkpoints
+*.pt
+runs_view_point/
+runs_seg/
+pizza10/
+pizza10_seg/
+runs_pizza3d/
+runs_pizzaMaker/
+outputs/

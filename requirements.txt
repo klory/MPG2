@@ -1,0 +1,16 @@
+tqdm==4.47.0
+torch==1.6.0
+torchvision==0.7.0
+numpy==1.18.5
+pandas==1.0.5
+lmdb==0.99
+Pillow==7.2.0
+matplotlib==3.2.2
+wandb==0.10.11
+transformers==3.1.0
+scipy==1.5.0
+scikit-learn==0.23.1
+nltk==3.5
+pytest==5.4.3
+opencv-python==4.4.0.46
+streamlit==1.0.0

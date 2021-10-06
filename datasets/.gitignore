@@ -1,0 +1,8 @@
+__pycache__/
+*.pt
+.pytest_cache
+40_Textures/
+blender_utils.py
+*.jpg
+*.png
+ignore/

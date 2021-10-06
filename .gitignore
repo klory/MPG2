@@ -1,0 +1,22 @@
+.ipynb_checkpoints/
+.vscode/
+achieved/
+old_classifiers/
+foodSpace_jiatong/
+stylegan2-pytorch/
+data/
+# AttnGAN/
+__pycache__/
+wandb/
+runs/
+*.pt
+sefa/
+blender-git
+angle_classifier/
+*.ipynb
+pizzamaker/
+segmentation/
+*.whl
+*.blend
+mpg_plusView_guoyao
+DM-GAN/

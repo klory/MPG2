@@ -1,0 +1,5 @@
+runs/
+wandb/
+runs_old/
+runs_train_on_pizzaView/
+runs_on_synthetic
