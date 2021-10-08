@@ -1,4 +1,4 @@
-This is the official code for **MPG2: Multi-attribute Pizza Generator: Cross-domain Attribute Control with Conditional StyleGAN**.
+This is the official code for **Multi-attribute Pizza Generator (MPG2): Cross-domain Attribute Control with Conditional StyleGAN**.
 
 | [Paper]() | [Demo]() |
 | --- | --- |
