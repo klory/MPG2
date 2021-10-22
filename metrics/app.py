@@ -143,7 +143,7 @@ def main():
     categories_filename = f'{ROOT}/data/Pizza10/categories.txt'
     categories = load_categories(categories_filename)
 
-    ckpt_path = f'{ROOT}/mpg/runs/30cupu9m/00200000.ckpt'
+    ckpt_path = f'{ROOT}/mpg/runs/30cupu9m/00260000.ckpt'
     classifier_path = f'{ROOT}/ingr_classifier/runs/pizza10/1t5xrvwx/batch5000.ckpt'
     regressor_path = f'{ROOT}/view_regressor/runs/pizza3d/1ab8hru7/00004999.ckpt'
     device='cuda'

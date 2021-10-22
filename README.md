@@ -62,7 +62,7 @@ $ CUDA_VISIBLE_DEVICES=0,1 python train.py --wandb=0
 
 ## Validate
 
-Download the pretrained model `google-linkmpg/runs/30cupu9m/00200000.ckpt`.
+Download the pretrained model `google-linkmpg/runs/30cupu9m/00260000.ckpt`.
 
 cd to `metrics/`:
 
@@ -75,7 +75,21 @@ CUDA_VISIBLE_DEVICES=0 python generate_samples.py --model=mpg
 # Metrics
 > cd to `metrics/`,
 
-For FID and mAP, please follow [MPG repository](https://github.com/klory/MPG_Arxiv).
+For more about FID and mAP, follow [MPG repository](https://github.com/klory/MPG_Arxiv).
+
+## FID (Frechet Inception Distance)
+To compute FID, we need to first compute the statistics of the real images.
+
+```
+CUDA_VISIBLE_DEVICES=0 python calc_inception.py
+```
+
+then
+```
+$ CUDA_VISIBLE_DEVICES=0 python fid.py --model=mpg
+```
+
+I got `FID=6.33` using the provided checkpoint.
 
 ## mAE (mean Absolute Error) for view attributes
 

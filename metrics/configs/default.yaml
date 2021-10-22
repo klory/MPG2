@@ -7,4 +7,4 @@ datasets:
 models: 
   mpg:
     ckpt_dir: mpg/runs/30cupu9m
-    ckpt_path: mpg/runs/30cupu9m/00200000.ckpt
+    ckpt_path: mpg/runs/30cupu9m/00260000.ckpt
