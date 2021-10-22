@@ -127,16 +127,13 @@ def config_input(col, col_name, categories, generator, device):
 
 def main():
     st.set_page_config(page_title='MPG2', layout="wide")
-    st.title('MPG2: Multi-attribute Pizza Generator: Cross-domain Attribute Control with Conditional StyleGAN')
+    st.title('MPG2 - Multi-attribute Pizza Generator: Cross-domain Attribute Control with Conditional StyleGAN')
     txt = '''
-    | [Back to FoodAI](http://foodai.cs.rutgers.edu) | [Paper]() | [Code]() |
+    | [Back to FoodAI](http://foodai.cs.rutgers.edu) | [Paper]() | [Code](https://github.com/klory/MPG2) |
     |---|---|---|
 
-    Below is an interactive demo for **interpolation between two generated images**, \
-        Image A is generated from the ingredients and style noise on the left \
-        while Image B is generated from the right panel, \
-        the image in the middle is the interpolation between the two images.\
-        Feel free to change the ingredients, style noise, diversity level and interpolation point.
+    The image in the middle is the interpolation between the two images.\
+        Feel free to change the ingredients, **VIEW ATTRIBUTES**, style noise, diversity level and interpolation points.
     '''
     st.markdown(txt)
 
@@ -171,7 +168,7 @@ def main():
         right_col.pyplot(fig)
 
         mid_col.header("Interpolation")
-        ingr_from_src2 = mid_col.slider('Label from Image B', min_value=0.0, max_value=1.0, value=0.5, step=0.01)
+        ingr_from_src2 = mid_col.slider('Ingr+View from Image B', min_value=0.0, max_value=1.0, value=0.5, step=0.01)
         noise_from_src2 = mid_col.slider('Style from Image B', min_value=0.0, max_value=1.0, value=0.5, step=0.01)
         label = ingr_from_src2*label_2 + (1-ingr_from_src2)*label_1
         noise = noise_from_src2*noise_2 + (1-noise_from_src2)*noise_1
