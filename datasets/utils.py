@@ -17,6 +17,12 @@ resnet_transform_val = transforms.Compose([
     normalize,
 ])
 
+inception_transform = transforms.Compose([
+    transforms.Resize((299, 299)),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=0.5, std=0.5)
+])
+
 gan_transform = transforms.Compose([
     transforms.Resize((256, 256)),
     transforms.RandomHorizontalFlip(),

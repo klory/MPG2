@@ -584,6 +584,8 @@ class Generator(nn.Module):
             # combine label_embedding [bs, n_latent/2, embed_dim] and latent [bs, n_latent, style_dim]
             bs, half_n_latent, embed_dim = label_embedding.shape
             repeated_label_embedding = label_embedding.repeat(1,1,2).view(bs, self.n_latent, self.style_dim)
+            if repeated_label_embedding.shape != latent.shape:
+                print(bs, half_n_latent, embed_dim, repeated_label_embedding.shape, latent.shape)
             assert repeated_label_embedding.shape == latent.shape, 'repeated_label_embedding and latent have to be the same shape'
             latent = torch.cat([repeated_label_embedding, latent], dim=-1) # [bs, n_latent, embed_dim+style_dim]
         

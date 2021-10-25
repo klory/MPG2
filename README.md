@@ -89,7 +89,7 @@ then
 $ CUDA_VISIBLE_DEVICES=0 python fid.py --model=mpg
 ```
 
-I got `FID=6.33` using the provided checkpoint.
+I got `FID=6.33` using the provided checkpoint under 5000 samples, and `FID=4.84` under 50000 samples.
 
 ## mAE (mean Absolute Error) for view attributes
 

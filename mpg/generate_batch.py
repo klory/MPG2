@@ -18,23 +18,23 @@ class BatchGenerator():
     def __init__(self, args):
         device = args.device
         ckpt_path = args.ckpt_path
+
         ckpt_args, _, label_encoder, _, _, netG, _, _, _ = load_mpg(ckpt_path, device=device)
+        self.label_encoder = label_encoder
+        self.netG = netG
+        label_encoder = label_encoder.requires_grad_(False).eval()
+        netG = netG.requires_grad_(False).eval()
+
         _, _, self.view_regressor, _  = load_regressor(args.view_regressor)
-        self.view_regressor.eval()
-        requires_grad(self.view_regressor, False)
-        label_encoder = label_encoder.eval().to(device)
-        netG = netG.eval().to(device)
-        requires_grad(label_encoder, False)
-        requires_grad(netG, False)
+        self.view_regressor.requires_grad_(False).eval()
+
         if args.dataset == 'pizza10':
             dataset = Pizza10Dataset(transform=gan_transform)
         else:
             raise Exception('Unsupported dataset!')
-        dataloader = torch.utils.data.DataLoader(dataset, batch_size=args.batch_size, num_workers=4)
+        dataloader = torch.utils.data.DataLoader(dataset, batch_size=args.batch_size, num_workers=4, drop_last=True)
         self.dataloader = infinite_loader(dataloader)
         self.ckpt_args = ckpt_args
-        self.label_encoder = label_encoder
-        self.netG = netG
         self.batch_size = args.batch_size
         self.truncation = args.truncation
         self.device = device
@@ -73,23 +73,16 @@ class BatchGenerator():
 
         if 'pizza10' in self.args.dataset:
             ingr_label = target['ingr_label'].to(self.device)
-            if ('random_view' in self.ckpt_args.__dict__ and self.ckpt_args.random_view) or ('random_label' in self.ckpt_args.__dict__ and self.ckpt_args.random_label):
-                view_label = torch.rand(real.shape[0], 4).to(self.device)
-                view_label[:,1] = view_label[:,1] * 0.67 + 0.33
-                view_label[:,2] = (view_label[:,2]-0.5)/0.5
-                view_label[:,3] = (view_label[:,3]-0.5)/0.5
-            else:
-                view_img = normalize(resize((real)))
-                view_output = self.view_regressor(view_img)
-                view_label = view_output
+            view_img = normalize(resize((real)))
+            view_output = self.view_regressor(view_img)
+            view_label = view_output
             label = torch.cat([ingr_label, view_label], dim=1)
             if same_style:
                 z = self.fixed_z
             else:
                 z = torch.randn_like(self.fixed_z)
-            with torch.no_grad():
-                txt_feat = self.label_encoder(label)
-                fake, _ = self.netG([z], txt_feat, truncation=self.truncation, truncation_latent=self.mean_latent, randomize_noise=randomize_noise)
+            txt_feat = self.label_encoder(label)
+            fake, _ = self.netG([z], txt_feat, truncation=self.truncation, truncation_latent=self.mean_latent, randomize_noise=randomize_noise)
             return target['raw_label'], real, fake, label
             # txt: [BS], array of strings, e.g. [['Arugula\nTomato\nPepperoni'], ...]
             # real: [BS, 3, size, size]
@@ -101,10 +94,9 @@ class BatchGenerator():
                 z = self.fixed_z
             else:
                 z = torch.randn_like(self.fixed_z)
-            with torch.no_grad():
-                txt_feat = self.label_encoder(label)
-                fake, _ = self.netG(txt_feat, z, truncation=self.truncation, truncation_latent=self.mean_latent, randomize_noise=randomize_noise)
-                batch_fake_img = fake
+            txt_feat = self.label_encoder(label)
+            fake, _ = self.netG(txt_feat, z, truncation=self.truncation, truncation_latent=self.mean_latent, randomize_noise=randomize_noise)
+            batch_fake_img = fake
             return None, img, batch_fake_img, label
 
 

@@ -92,6 +92,7 @@ if __name__ == '__main__':
     # load inception model
     inception = load_patched_inception_v3()
     inception = inception.eval().to(device)
+    inception.requires_grad_(False)
     
     # *******************************
     # only run for one checkpoint

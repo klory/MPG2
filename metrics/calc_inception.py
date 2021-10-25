@@ -80,12 +80,12 @@ if __name__ == '__main__':
 
     if 'pizza10' in args.dataset:
         from datasets.pizza10 import Pizza10Dataset
-        dataset = Pizza10Dataset(transform=utils.resnet_transform_train, resolution=args.size)
+        dataset = Pizza10Dataset(transform=utils.inception_transform)
     else:
         raise Exception('Unsupported dataset!')
         
-    assert len(dataset) >= args.n_sample
-    dataset = torch.utils.data.Subset(dataset, indices=np.random.choice(len(dataset), args.n_sample, replace=False))
+    if len(dataset) > args.n_sample:
+        dataset = torch.utils.data.Subset(dataset, indices=np.random.choice(len(dataset), args.n_sample, replace=False))
     loader = DataLoader(dataset, batch_size=args.batch_size, num_workers=4)
     print(len(dataset), len(loader))
 
@@ -97,5 +97,5 @@ if __name__ == '__main__':
     mean = np.mean(features, 0)
     cov = np.cov(features, rowvar=False)
 
-    with open(f'inception_{args.dataset_name}.pkl', 'wb') as f:
-        pickle.dump({'mean': mean, 'cov': cov, 'size': args.size, 'dataset_name': args.dataset_name}, f)
+    with open(f'inception_{args.dataset}_{args.n_sample}.pkl', 'wb') as f:
+        pickle.dump({'mean': mean, 'cov': cov, 'size': args.size, 'dataset': args.dataset}, f)
