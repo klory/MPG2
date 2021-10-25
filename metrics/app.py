@@ -129,7 +129,7 @@ def main():
     st.set_page_config(page_title='MPG2', layout="wide")
     st.title('MPG2 - Multi-attribute Pizza Generator: Cross-domain Attribute Control with Conditional StyleGAN')
     txt = '''
-    | [Back to FoodAI](http://foodai.cs.rutgers.edu) | [Paper]() | [Code](https://github.com/klory/MPG2) |
+    | [Back to FoodAI](http://foodai.cs.rutgers.edu) | [Paper](https://arxiv.org/abs/2110.11830) | [Code](https://github.com/klory/MPG2) |
     |---|---|---|
 
     The image in the middle is the interpolation between the two images.\

@@ -1,6 +1,6 @@
 This is the official code for **Multi-attribute Pizza Generator (MPG2): Cross-domain Attribute Control with Conditional StyleGAN**.
 
-| [Paper]() | [Demo](http://foodai.cs.rutgers.edu:2022/) |
+| [Paper](https://arxiv.org/abs/2110.11830) | [Demo](http://foodai.cs.rutgers.edu:2022/) |
 | --- | --- |
 
 # Setup Environment
